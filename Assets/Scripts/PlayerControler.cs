@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControler : MonoBehaviour
 {
@@ -11,28 +12,27 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] KeyCode keyTwo;
     [SerializeField] Vector3 moveDirection;
     [SerializeField] GameObject Finish;
+   
+    
     private CharacterController controller;
-
+    
+    
+    
 void Start()
 {
     controller = GetComponent<CharacterController>();
      Time.timeScale = 1;
+    
 }
     private void FixedUpdate()
     {
        controller.Move(moveDirection * Time.deltaTime);
-        if (Input.GetKey(keyOne))
-        {
-            transform.Rotate(new Vector3(0,90,0) * Time.deltaTime);
-        }
-        if (Input.GetKey(keyTwo))
-        {
-            transform.Rotate(new Vector3(0,-90,0) * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+     if (Input.GetKey(KeyCode.R))
+       {
+          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+       }
+       
+        
         
     }
     private void OnCollisionEnter(Collision collision)
@@ -44,7 +44,16 @@ void Start()
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Finish")
+        {
         Finish.SetActive(true);
         Time.timeScale = 0;
+        }
+        
     }
+    
+
+
+
+
 }

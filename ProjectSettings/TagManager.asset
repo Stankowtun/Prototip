@@ -6,6 +6,8 @@ TagManager:
   tags:
   - enemi
   - Slow
+  - coin
+  - Money
   layers:
   - Default
   - TransparentFX
