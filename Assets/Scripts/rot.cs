@@ -14,7 +14,7 @@ void Update()
  
                 if (screenTouch.phase == TouchPhase.Moved)
                 {
-                    transform.Rotate(0f, screenTouch.deltaPosition.x*0.1f, 0f);
+                    transform.Rotate(0f, screenTouch.deltaPosition.x*0.3f, 0f);
                 }
  
                 

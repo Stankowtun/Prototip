@@ -1,19 +1,36 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemi : MonoBehaviour
 {
-    private float Start = 0;
-    private float End = 4;
+    private bool hasCollided = false;
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+    }
+
     public void OnHit()
     {
-   GetComponent<Rigidbody>().isKinematic = false;
-   Start += 0.1f * Time.deltaTime;
-        if (Start>=End)
+        if (!hasCollided)
         {
-            Destroy (gameObject);
+            hasCollided = true;
+
+            // Отримуємо поточну позицію об'єкта
+            Vector3 currentPosition = transform.position;
+
+            // Встановлюємо нову позицію зі зміненими координатами
+            Vector3 newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - 1f);
+
+            // Змінюємо позицію об'єкта на нову позицію
+            transform.position = newPosition;
         }
+
+        GetComponent<Collider>().isTrigger = true;
+        rb.isKinematic = false;
+        rb.useGravity = true;
     }
 }
-
